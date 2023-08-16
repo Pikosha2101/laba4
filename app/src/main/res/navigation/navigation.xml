@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/authorizationFragment">
+
+    <fragment
+        android:id="@+id/authorizationFragment"
+        android:name="com.example.laba4_4.Fragment.authorizationFragment"
+        android:label="authorizationFragment"
+        tools:layout="@layout/authorization_fragment">
+        <action
+            android:id="@+id/action_authorizationFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_authorizationFragment_to_themeFragment"
+            app:destination="@id/themeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.example.laba4_4.Fragment.registrationFragment"
+        android:label="registrationFragment"
+        tools:layout="@layout/registration_fragment">
+        <action
+            android:id="@+id/action_registrationFragment_to_authorizationFragment"
+            app:destination="@id/authorizationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/themeFragment"
+        android:name="com.example.laba4_4.Fragment.themeFragment"
+        android:label="themeFragment" >
+        <action
+            android:id="@+id/action_themeFragment_to_authorizationFragment"
+            app:destination="@id/authorizationFragment" />
+    </fragment>
+</navigation>
