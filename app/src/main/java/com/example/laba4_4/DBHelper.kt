@@ -12,6 +12,9 @@ class DBHelper(
         private const val name = "dblab4"
         private const val version = 1
     }
+
+    private var TABLE_CONTACTS = "myDB"
+
     override fun onCreate(db: SQLiteDatabase?) {
         Log.d("myLogs", "---On create database---")
         db?.execSQL("create table mytable ("
@@ -21,13 +24,8 @@ class DBHelper(
                 + "count integer" + ");")
     }
 
-
-    private var TABLE_CONTACTS = "myDB"
-
-
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db!!.execSQL("drop table if exists $TABLE_CONTACTS")
-
         onCreate(db)
     }
 }

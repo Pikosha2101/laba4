@@ -14,11 +14,6 @@ class authorizationFragment : Fragment(R.layout.authorization_fragment) {
     private val binding get() = _binding!!
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,8 +24,6 @@ class authorizationFragment : Fragment(R.layout.authorization_fragment) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
-        //super.onViewCreated(view, savedInstanceState)
-
         button.setOnClickListener(){
             findNavController().navigate(R.id.action_authorizationFragment_to_themeFragment)
         }

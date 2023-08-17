@@ -59,9 +59,7 @@ class themeFragment : Fragment(R.layout.theme_fragment),
                 ThemeModel("Какая-то тема")
             )
         )
-
         recyclerView.adapter = themeAdapter
-
     }
 
     override fun onDestroy() {

@@ -27,8 +27,6 @@ class registrationFragment : Fragment(R.layout.registration_fragment) {
     ): View {
         _binding = RegistrationFragmentBinding.inflate(inflater, container, false)
         dbHelper = DBHelper(requireContext())
-
-
         return binding.root
     }
 

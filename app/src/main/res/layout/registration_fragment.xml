@@ -10,7 +10,7 @@
         android:layout_marginTop="288dp"
         android:autofillHints=""
         android:ems="10"
-        android:hint="login"
+        android:hint="Логин"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,58 +20,45 @@
         android:id="@+id/button"
         android:layout_width="151dp"
         android:layout_height="55dp"
-        android:layout_marginTop="600dp"
-        android:text="create"
+        android:layout_marginTop="16dp"
+        android:text="Создать"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2" />
 
 
     <EditText
         android:id="@+id/editTextTextPassword"
         android:layout_width="287dp"
         android:layout_height="51dp"
-        android:layout_marginTop="408dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="pass"
+        android:hint="Пароль"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="289dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="340dp"
-        android:ems="10"
-        android:hint="email"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/login" />
 
 
     <EditText
         android:id="@+id/editTextTextPassword2"
         android:layout_width="286dp"
         android:layout_height="49dp"
-        android:layout_marginTop="472dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="pass"
+        android:hint="Повторите пароль"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
     <Button
         android:id="@+id/back_button"
         android:layout_width="151dp"
         android:layout_height="55dp"
-        android:layout_marginTop="660dp"
-        android:text="back"
+        android:layout_marginTop="16dp"
+        android:text="Назад"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
