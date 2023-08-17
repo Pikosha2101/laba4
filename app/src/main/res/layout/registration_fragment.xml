@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <EditText
-        android:id="@+id/login1"
+        android:id="@+id/login"
         android:layout_width="287dp"
         android:layout_height="52dp"
         android:layout_marginTop="288dp"
