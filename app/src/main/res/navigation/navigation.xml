@@ -29,9 +29,22 @@
     <fragment
         android:id="@+id/themeFragment"
         android:name="com.example.laba4_4.Fragment.themeFragment"
-        android:label="themeFragment" >
+        android:label="themeFragment"
+        tools:layout="@layout/theme_fragment">
         <action
             android:id="@+id/action_themeFragment_to_authorizationFragment"
             app:destination="@id/authorizationFragment" />
+        <action
+            android:id="@+id/action_themeFragment_to_resultsFragment"
+            app:destination="@id/resultsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultsFragment"
+        android:name="com.example.laba4_4.Fragment.resultsFragment"
+        android:label="resultsFragment"
+        tools:layout="@layout/results_fragment">
+        <action
+            android:id="@+id/action_resultsFragment_to_themeFragment"
+            app:destination="@id/themeFragment" />
     </fragment>
 </navigation>

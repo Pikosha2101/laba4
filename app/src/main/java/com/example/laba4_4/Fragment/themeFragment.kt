@@ -1,5 +1,6 @@
 package com.example.laba4_4.Fragment
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -45,7 +46,7 @@ class themeFragment : Fragment(R.layout.theme_fragment),
             findNavController().navigate(R.id.action_themeFragment_to_authorizationFragment)
         }
         resBut.setOnClickListener{
-
+            findNavController().navigate(R.id.action_themeFragment_to_resultsFragment)
         }
         recyclerView.layoutManager = GridLayoutManager(context, 1)
         themeAdapter.setList(
@@ -68,6 +69,7 @@ class themeFragment : Fragment(R.layout.theme_fragment),
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun onClick(param: ThemeModel) {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
