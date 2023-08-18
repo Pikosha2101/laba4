@@ -2,6 +2,8 @@ package com.example.laba4_4.Fragment
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.ContentValues
+import android.database.sqlite.SQLiteDatabase
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -17,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.laba4_4.Adapter.ThemeAdapter
+import com.example.laba4_4.DBHelper
 import com.example.laba4_4.Listener
 import com.example.laba4_4.Model.ThemeModel
 import com.example.laba4_4.R
@@ -31,6 +34,7 @@ class themeFragment : Fragment(R.layout.theme_fragment),
     private lateinit var but: Button
     private lateinit var et: EditText
     private lateinit var tv: TextView
+    private var dbHelper: DBHelper? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +42,8 @@ class themeFragment : Fragment(R.layout.theme_fragment),
         savedInstanceState: Bundle?
     ): View {
         _binding = ThemeFragmentBinding.inflate(inflater, container, false)
+
+        dbHelper = DBHelper(requireContext())
         return binding.root
     }
 
@@ -80,15 +86,25 @@ class themeFragment : Fragment(R.layout.theme_fragment),
         but = dialog.findViewById(R.id.butAnswer)
         et = dialog.findViewById(R.id.etAnswer)
         tv = dialog.findViewById(R.id.quest)
+        val userLogin = arguments?.getString("userLogin").toString()
 
+        val db: SQLiteDatabase = dbHelper?.writableDatabase as SQLiteDatabase
         when (param.theme){
             "Сложение" -> {
                 tv.text = "2+2=?"
                 but.setOnClickListener {
                     if (et.text.toString() == "4") {
+                        val contentValues = ContentValues()
+                        contentValues.put("plus", 1)
+                        db.update("user", contentValues, "login=?", arrayOf(userLogin))
+                        db.close()
                         Toast.makeText(activity, "Красава!", Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                     } else {
+                        val contentValues = ContentValues()
+                        contentValues.put("plus", 0)
+                        db.update("user", contentValues, "login=?", arrayOf(userLogin))
+                        db.close()
                         Toast.makeText(activity, "Не красава!", Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                     }
@@ -98,9 +114,15 @@ class themeFragment : Fragment(R.layout.theme_fragment),
                 tv.text = "6-1=?"
                 but.setOnClickListener{
                     if (et.text.toString() == "5"){
+                        val contentValues = ContentValues()
+                        contentValues.put("minus", 1)
+                        db.update("user", contentValues, "login=?", arrayOf("pikosha"))
                         Toast.makeText(activity,"Красава!",Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                     } else {
+                        val contentValues = ContentValues()
+                        contentValues.put("minus", 0)
+                        db.update("user", contentValues, "login=?", arrayOf("pikosha"))
                         Toast.makeText(activity,"Не красава!",Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                     }
@@ -110,9 +132,15 @@ class themeFragment : Fragment(R.layout.theme_fragment),
                 tv.text = "60:10=?"
                 but.setOnClickListener{
                     if (et.text.toString() == "6"){
+                        val contentValues = ContentValues()
+                        contentValues.put("multiplication", 1)
+                        db.update("user", contentValues, "login=?", arrayOf("pikosha"))
                         Toast.makeText(activity,"Красава!",Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                     } else {
+                        val contentValues = ContentValues()
+                        contentValues.put("multiplication", 0)
+                        db.update("user", contentValues, "login=?", arrayOf("pikosha"))
                         Toast.makeText(activity,"Не красава!",Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                     }
@@ -122,9 +150,15 @@ class themeFragment : Fragment(R.layout.theme_fragment),
                 tv.text = "5*5=?"
                 but.setOnClickListener{
                     if (et.text.toString() == "25"){
+                        val contentValues = ContentValues()
+                        contentValues.put("division", 1)
+                        db.update("user", contentValues, "login=?", arrayOf("pikosha"))
                         Toast.makeText(activity,"Красава!",Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                     } else {
+                        val contentValues = ContentValues()
+                        contentValues.put("division", 0)
+                        db.update("user", contentValues, "login=?", arrayOf("pikosha"))
                         Toast.makeText(activity,"Не красава!",Toast.LENGTH_SHORT).show()
                         dialog.dismiss()
                     }

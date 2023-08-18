@@ -17,6 +17,7 @@ class authorizationFragment : Fragment(R.layout.authorization_fragment) {
     private val binding get() = _binding!!
     private var dbHelper: DBHelper? = null
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,8 +29,11 @@ class authorizationFragment : Fragment(R.layout.authorization_fragment) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
-        button.setOnClickListener{ //вход
-            input()
+        super.onViewCreated(view, savedInstanceState)
+
+        val bundle = Bundle()
+        button.setOnClickListener{
+            input(bundle)
         }
 
         button2.setOnClickListener{
@@ -43,12 +47,21 @@ class authorizationFragment : Fragment(R.layout.authorization_fragment) {
     }
 
 
-    private fun input(){
+    private fun input(bundle : Bundle){
         if (binding.login.text.isEmpty() || binding.password.text.isEmpty()){
             Toast.makeText(requireContext(), "Заполните все поля!", Toast.LENGTH_LONG).show()
         } else{
             if (check()) {
-                findNavController().navigate(R.id.action_authorizationFragment_to_themeFragment)
+                /*val bundle = Bundle().apply {
+                    putString("userLogin", binding.login.text.toString())
+                }
+                themeFragment().arguments = bundle
+                val fragmentManager = requireActivity().supportFragmentManager*/
+
+
+                bundle.putString("userLogin", binding.login.text.toString())
+
+                findNavController().navigate(R.id.action_authorizationFragment_to_themeFragment, bundle)
             } else{
                 Toast.makeText(requireContext(), "Неверный логин или пароль!", Toast.LENGTH_LONG).show()
             }
@@ -60,7 +73,7 @@ class authorizationFragment : Fragment(R.layout.authorization_fragment) {
         val log: String = binding.login.text.toString()
         val pas: String = binding.password.text.toString()
 
-        val str = "Select * from mytable where login = $log and password = $pas"
+        val str = "Select * from user where login = '$log' and password = '$pas'"
         val cursor = db.rawQuery(str, null)
         return if (cursor.count <= 0) {
             //аккаунта нет

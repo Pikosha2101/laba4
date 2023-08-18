@@ -50,14 +50,17 @@ class registrationFragment : Fragment(R.layout.registration_fragment) {
             val db: SQLiteDatabase = dbHelper?.writableDatabase as SQLiteDatabase
             val log: String = binding.login.text.toString()
             val pas: String = binding.editTextTextPassword.text.toString()
-            if (check("mytable", log, pas, db)) {
+            if (check(log, pas, db)) {
                     Toast.makeText(requireContext(), "Аккаунт уже существует!", Toast.LENGTH_LONG).show()
             } else {
                 val cv = ContentValues()
                 cv.put("login", log)
                 cv.put("password", pas)
-                cv.put("count", 0)
-                val rowId = db.insert("mytable", null, cv)
+                cv.put("plus", 0)
+                cv.put("minus", 0)
+                cv.put("multiplication", 0)
+                cv.put("division", 0)
+                val rowId = db.insert("user", null, cv)
                 Log.d(LOG_TAG, "row inserted, ID = $rowId")
                 Toast.makeText(requireContext(), "Аккаунт создан!", Toast.LENGTH_LONG).show()
             }
@@ -66,9 +69,9 @@ class registrationFragment : Fragment(R.layout.registration_fragment) {
         }
     }
 
-    fun check(tableName: String, value1: String, value2: String, db: SQLiteDatabase): Boolean {
+    private fun check(value1: String, value2: String, db: SQLiteDatabase): Boolean {
         val str =
-            "Select * from $tableName where login = $value1 and password = $value2"
+            "Select * from user where login = '$value1' and password = '$value2'"
         val cursor = db.rawQuery(str, null)
         return if (cursor.count <= 0) {
             //аккаунта нет

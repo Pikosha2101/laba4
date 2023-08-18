@@ -10,18 +10,21 @@ class DBHelper(
     SQLiteOpenHelper(context, name, null, version) {
     companion object{
         private const val name = "dblab4"
-        private const val version = 1
+        private const val version = 2
     }
 
     private var TABLE_CONTACTS = "myDB"
 
     override fun onCreate(db: SQLiteDatabase?) {
         Log.d("myLogs", "---On create database---")
-        db?.execSQL("create table mytable ("
+        db?.execSQL("create table user ("
                 + "id integer primary key autoincrement,"
                 + "login text,"
                 + "password text,"
-                + "count integer" + ");")
+                + "plus integer,"
+                + "minus integer,"
+                + "multiplication integer,"
+                + "division integer" + ");")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

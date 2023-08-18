@@ -1,5 +1,6 @@
 package com.example.laba4_4.Fragment
 
+import  android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,15 +28,11 @@ class resultsFragment : Fragment(R.layout.results_fragment) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
-        /*backButton.setOnClickListener{
-            findNavController().navigate(R.id.action_registrationFragment_to_authorizationFragment)
-        }
-        button.setOnClickListener{
-            create()
-        }*/
         binding.button.setOnClickListener{
             findNavController().navigate(R.id.action_resultsFragment_to_themeFragment)
         }
+
+        resTV.text = res()
     }
 
     override fun onDestroy() {
@@ -43,39 +40,29 @@ class resultsFragment : Fragment(R.layout.results_fragment) {
         _binding = null
     }
 
-    /*private fun create(){
 
-        if (binding.editTextTextPassword.text.toString() == binding.editTextTextPassword2.text.toString()) {
-            val db: SQLiteDatabase = dbHelper?.writableDatabase as SQLiteDatabase
-            val log: String = binding.login.text.toString()
-            val pas: String = binding.editTextTextPassword.text.toString()
-            if (check("mytable", log, pas, db)) {
-                Toast.makeText(requireContext(), "Аккаунт уже существует!", Toast.LENGTH_LONG).show()
-            } else {
-                val cv = ContentValues()
-                cv.put("login", log)
-                cv.put("password", pas)
-                cv.put("count", 0)
-                val rowId = db.insert("mytable", null, cv)
-                Log.d(LOG_TAG, "row inserted, ID = $rowId")
-                Toast.makeText(requireContext(), "Аккаунт создан!", Toast.LENGTH_LONG).show()
-            }
+    fun res() : String {
+        dbHelper = DBHelper(requireContext())
+        val db: SQLiteDatabase = dbHelper!!.writableDatabase
+        val c = db.query("user", null, null, null, null, null, null)
+        return if (c.moveToFirst()) {
+            val loginColIndex = c.getColumnIndex("login")
+            val plusColIndex = c.getColumnIndex("plus")
+            val minusColIndex = c.getColumnIndex("minus")
+            val multiplicationColIndex = c.getColumnIndex("multiplication")
+            val divisionColIndex = c.getColumnIndex("division")
+
+            var res = ""
+            do {
+                res += "login = ${c.getString(loginColIndex)}: \nсложение = ${c.getString(plusColIndex)}б.,\nвычитание = ${c.getInt(minusColIndex)}б.,\nумножение = ${c.getInt(multiplicationColIndex)}б., \nделение = ${c.getInt(divisionColIndex)}б.\n\n"
+            } while (c.moveToNext())
+            dbHelper!!.close()
+            c.close()
+            res
         } else {
-            Toast.makeText(requireContext(), "Пароли не совпадают!", Toast.LENGTH_LONG).show()
+            c.close()
+            dbHelper!!.close()
+            "Пусто!"
         }
     }
-
-    fun check(tableName: String, value1: String, value2: String, db: SQLiteDatabase): Boolean {
-        val str =
-            "Select * from $tableName where login = $value1 and password = $value2"
-        val cursor = db.rawQuery(str, null)
-        return if (cursor.count <= 0) {
-            //аккаунта нет
-            cursor.close()
-            false
-        } else {
-            cursor.close()
-            true
-        }
-    }*/
 }
