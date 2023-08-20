@@ -1,6 +1,5 @@
 package com.example.laba4_4.Fragment
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
@@ -75,7 +74,6 @@ class themeFragment : Fragment(R.layout.theme_fragment),
     }
 
 
-    @SuppressLint("SetTextI18n")
     override fun onClick(param: ThemeModel) {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
